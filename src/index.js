@@ -1,5 +1,6 @@
-const express = require('express');
-const cors = require('cors');
+const express = require("express");
+const cors = require("cors");
+const movies = require("./data/movies.json");
 
 // create and config server
 const server = express();
@@ -14,24 +15,14 @@ server.listen(serverPort, () => {
 
 //Programar las APIS
 
-server.get('/movies', (req, res) => {
+server.get("/movies", (req, res) => {
   res.json({
     success: true,
-    movies: [
-      {
-        id: '1',
-        title: 'Gambita de dama',
-        gender: 'Drama',
-        image: 'https://via.placeholder.com/150',
-      },
-      {
-        id: '2',
-        title: 'Friends',
-        gender: 'Comedia',
-        image: 'https://via.placeholder.com/150',
-      },
-    ],
+    movies: movies,
   });
 });
-const staticServerPathWeb = './public-react'; // En esta carpeta ponemos los ficheros estáticos
+const staticServerPathWeb = "./public-react"; // En esta carpeta ponemos los ficheros estáticos
 server.use(express.static(staticServerPathWeb));
+
+const staticServerPathPhotos = "./src/public-movies-images"; // En esta carpeta ponemos los ficheros estáticos
+server.use(express.static(staticServerPathPhotos));
